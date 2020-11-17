@@ -20,10 +20,14 @@ const SeenMovieSlice = createSlice({
                     }
                 }
             }
+        },
+        seenMovieRemove(state, action) {
+            const { id } = action.payload;
+            return state.filter(movie => movie.id !== id);
         } 
     },
 });
 
-export const {seenMovieAdded} = SeenMovieSlice.actions;
+export const {seenMovieAdded, seenMovieRemove} = SeenMovieSlice.actions;
 
 export default SeenMovieSlice.reducer;

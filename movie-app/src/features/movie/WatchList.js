@@ -3,6 +3,9 @@ import {useSelector, useDispatch} from 'react-redux';
 import '../../sass/_watchlist.scss';
 import { watchListAdded } from './ToWatchSlice';
 import MovieItem from './MovieItem';
+import { useDrop } from 'react-dnd';
+import { ItemTypes } from './Constants';
+import {seenMovieRemove} from './SeenMovieSlice';
 
 const WatchList = () => {
     const dispatch = useDispatch();
@@ -15,9 +18,27 @@ const WatchList = () => {
 
     const onAddMovieTitle = (e) => {
         e.preventDefault();
-        dispatch(watchListAdded(movieTitle));
+        if(movieTitle !== '') {
+            document.querySelector('.error').textContent = '';
+            dispatch(watchListAdded(movieTitle));
+        } else {
+            document.querySelector('.error').textContent = 'Please enter a movie title.';
+        }
         setMovieTitle('');
     }
+
+    const [{isOver}, drop] = useDrop({
+        accept: ItemTypes.MOVIE,
+        drop: (e) => {
+            const movieInfo = e.movieInfo;
+            dispatch(watchListAdded(movieInfo.title));
+            dispatch(seenMovieRemove({id: movieInfo.id}));
+        },
+        collect: (monitor) => ({
+            isOver: !!monitor.isOver(),
+            item: monitor.getItem()
+        })
+    })
 
 
     useEffect(() => {
@@ -26,16 +47,17 @@ const WatchList = () => {
 
     return (
         <div className='watchListDiv'>
-            <div className='watchListContent'>
+            <div className='watchListContent' ref={drop}>
             <h1>Watch List</h1>
             <p className='description'>Add movies here to be seen in the future</p>
-            <div>
+            <div className='watchList'>
                 {toWatchList.map((movie, index) => {
                     return (
                         <MovieItem className='movieItem' MovieItem={movie.title} key={index} id={movie.id} MovieInfo={movie} currIndex={index} />
                     )
                 })}
             </div>
+            <p className='error'></p>
             <form>
                 <input
                     type='text'
@@ -44,7 +66,7 @@ const WatchList = () => {
                     value={movieTitle}
                     onChange={onMovieTitleChange}
                 />
-                <button onClick={onAddMovieTitle}>Add To Watchlist</button>
+                <button className='addWatchListBtn' onClick={onAddMovieTitle}>Add To Watchlist</button>
             </form>
             </div>
         </div>

@@ -1,3 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed&display=swap');
+$barlow: 'Barlow Semi Condensed', sans-serif;
+
+html {
+    overflow: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 5px; 
+}
+.watchList::-webkit-scrollbar-thumb {
+    background-color: green;
+    border-radius: 20px;   
+}
+
+.seenList::-webkit-scrollbar-thumb {
+    background-color: blue;
+    border-radius: 20px;   
+}
+
 .watchListDiv, .seenListDiv {
     box-shadow: 0 2px 20px 0 rgba(0,0,0,0.15);
     width: 250px;
@@ -9,19 +29,59 @@
     height: 95%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     margin: 3% 0;
     border-radius: 10px;
     padding: 0 5%;
+    overflow: hidden;
+
+    h1 {
+        font-family: $barlow;
+    }
 
     p {
         margin: 0;
+        font-family: $barlow;
     }
 }
 
-.watchListContent {border: 4px solid green}
-.seenListContent {border: 4px solid blue}
+.watchList, .seenList {
+    margin: 50% 0;
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.watchListContent {
+    border: 4px solid green;
+    h1 {
+        color: green;
+    }
+}
+.seenListContent {
+    border: 4px solid blue;
+    h1 {
+        color: blue;
+    }
+}
 
 .description {
     font-style: italic;
+}
+
+.error {
+    color: red;
+}
+
+.addWatchListBtn {
+    background: green;
+    border: none;
+    color: white;
+    font-family: $barlow;
+    padding: 5% 10%;
+    margin: 5% 0;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    &:hover {
+        opacity: 0.8;
+    }
 }

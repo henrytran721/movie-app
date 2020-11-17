@@ -12,10 +12,6 @@ const MovieItem = (props) => {
             item: monitor.getItem(),
             isDragging: !!monitor.isDragging()
         }),
-        end: (item) => {
-            const movieInfo = item.movieInfo;
-            dispatch(watchListRemove({id: movieInfo.id}));
-        }
     })
     return (
         <p 
@@ -25,8 +21,7 @@ const MovieItem = (props) => {
                 cursor: 'pointer',
             }}
         >
-        {props.currIndex + 1}.
-        {props.MovieItem}
+        {props.currIndex + 1}. {props.MovieItem}
         </p>
     );
 }
