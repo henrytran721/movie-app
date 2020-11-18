@@ -60,7 +60,7 @@ const WatchList = () => {
             <p className='error'></p>
             <form>
                 <input
-                    type='text'
+                    type='search'
                     name='newMovieTitle'
                     id='newMovieTitle'
                     value={movieTitle}
