@@ -5,14 +5,14 @@ const bcrypt = require('bcrypt');
 const dotenv = require('dotenv').config();
 const cors = require("cors");
 
-// const mysql = require('mysql');
+const mysql = require('mysql');
 
-// const db = mysql.createConnection({
-//     user: 'root',
-//     host: 'localhost',
-//     password: 'password',
-//     database: 'movieapp'
-// });
+const db = mysql.createConnection({
+    user: 'root',
+    host: 'localhost',
+    password: 'password',
+    database: 'movieapp'
+});
 
 
 
@@ -23,6 +23,17 @@ app.use(cors());
 
 app.get('/testAPI', (req, res) => {
     res.send('Hello, testAPI is working');
+})
+
+app.post('/signup', (req, res) => {
+    const hashedPassword = bcrypt.hash(req.body.password, 10);
+    db.query(`INSERT INTO users (first_name, last_name, username, email, password) VALUES ("${req.body.firstName}", "${req.body.lastName}", "${req.body.username}", "${req.body.email}", "${hashedPassword}")`, (err, res) => {
+        if(err) {
+            console.log(err);
+        } else {
+            res.send({redirect: '/'})
+        }
+    })
 })
 
 // app.get('/insert', (req, res) => {

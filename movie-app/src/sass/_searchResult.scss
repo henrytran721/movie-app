@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed&display=swap');
+$barlow: 'Barlow Semi Condensed', sans-serif;
+.searchResultsDiv {
+    background: rgb(241, 241, 241);
+    padding: 5%;
+    width: 400px;
+    margin: 5% 0;
+
+    .searchResult {
+        border-bottom: 1px solid black;
+        padding: 2% 0;
+        .searchResultHeader {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            h3 {
+                font-family: $barlow;
+            }
+            p {
+                font-family: $barlow;
+            }
+        }
+        p {
+            font-family: $barlow;
+        }
+    }
+
+    .movieImg {
+        max-width: 400px;
+    }
+}
+
+.searchMovHeader {
+font-family: $barlow;
+}
