@@ -1,40 +1,40 @@
-const express = require('express');
-const jwt = require('jsonwebtoken');
-const app = express();
-const bcrypt = require('bcrypt');
-const dotenv = require('dotenv').config();
-const cors = require("cors");
+// const express = require('express');
+// const jwt = require('jsonwebtoken');
+// const app = express();
+// const bcrypt = require('bcrypt');
+// const dotenv = require('dotenv').config();
+// const cors = require("cors");
 
-const mysql = require('mysql');
+// const mysql = require('mysql');
 
-const db = mysql.createConnection({
-    user: 'root',
-    host: 'localhost',
-    password: 'password',
-    database: 'movieapp'
-});
+// const db = mysql.createConnection({
+//     user: 'root',
+//     host: 'localhost',
+//     password: 'password',
+//     database: 'movieapp'
+// });
 
 
 
-const users = [{id: 1, name: 'Henry'}]
+// const users = [{id: 1, name: 'Henry'}]
 
-app.use(express.json());
-app.use(cors());
+// app.use(express.json());
+// app.use(cors());
 
-app.get('/testAPI', (req, res) => {
-    res.send('Hello, testAPI is working');
-})
+// app.get('/testAPI', (req, res) => {
+//     res.send('Hello, testAPI is working');
+// })
 
-app.post('/signup', (req, res) => {
-    const hashedPassword = bcrypt.hash(req.body.password, 10);
-    db.query(`INSERT INTO users (first_name, last_name, username, email, password) VALUES ("${req.body.firstName}", "${req.body.lastName}", "${req.body.username}", "${req.body.email}", "${hashedPassword}")`, (err, res) => {
-        if(err) {
-            console.log(err);
-        } else {
-            res.send({redirect: '/'})
-        }
-    })
-})
+// app.post('/signup', (req, res) => {
+//     const hashedPassword = bcrypt.hash(req.body.password, 10);
+//     db.query(`INSERT INTO users (first_name, last_name, username, email, password) VALUES ("${req.body.firstName}", "${req.body.lastName}", "${req.body.username}", "${req.body.email}", "${hashedPassword}")`, (err, res) => {
+//         if(err) {
+//             console.log(err);
+//         } else {
+//             res.send({redirect: '/'})
+//         }
+//     })
+// })
 
 // app.get('/insert', (req, res) => {
 //     db.query('INSERT INTO users (first_name, last_name, password) VALUES ("Henry", "Tran", "pineapple")', (err, result) => {
