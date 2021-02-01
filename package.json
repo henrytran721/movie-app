@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "cd movie-app && npm install && npm run build",
+    "start": "npm start --prefix movie-app",
     "devstart": "nodemon server.js"
   },
   "repository": {
